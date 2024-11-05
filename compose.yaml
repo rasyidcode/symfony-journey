@@ -1,0 +1,46 @@
+services:
+  php82:
+    build: .
+    image: sj-php82-fpm
+    container_name: sj-php82
+    restart: unless-stopped
+    volumes:
+      - ./first-page:/srv/first-page
+    depends_on:
+      - db
+    networks:
+      sj-network:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: sj-nginx
+    restart: unless-stopped
+    volumes:
+      - ./first-page:/srv/first-page
+      - ./first-page.test.conf:/etc/nginx/conf.d/first-page.test.conf
+    working_dir: /srv
+    ports:
+      - "80:80"
+    networks:
+      sj-network:
+        aliases:
+          - first-page.test
+    depends_on:
+      - php82
+  db:
+    image: mysql:8.0
+    container_name: sj-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - sj-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      sj-network:
+
+networks:
+  sj-network:
+
+volumes:
+  sj-data:
