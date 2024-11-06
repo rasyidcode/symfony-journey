@@ -13,7 +13,8 @@ RUN apk add --no-cache \
     git \
     openssh \
     make \
-    bash
+    bash \
+    alpine-conf
 
 RUN set -eux; \
     install-php-extensions \
@@ -32,5 +33,10 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' 
     apk add symfony-cli
 
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+RUN setup-user -a appuser && \
+    echo 'permit persist :wheel' > /etc/doas.d/doas.conf
+
+USER appuser
 
 WORKDIR /srv
