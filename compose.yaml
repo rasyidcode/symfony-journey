@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./first-page:/srv/first-page
-      - ./basic-blog-plain-php:/srv/basic-blog-plain-php
+      - ./blog-app:/srv/blog-app
       - ./first-page.test.conf:/etc/nginx/conf.d/first-page.test.conf
       - ./blog-app.test.conf:/etc/nginx/conf.d/blog-app.test.conf
     working_dir: /srv
