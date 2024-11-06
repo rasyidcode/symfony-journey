@@ -1,16 +1,16 @@
 <?php
 
-$connection = new PDO('mysql:host=db;dbname=basic_blog_plain_php_db', 'root', 'secret');
+$connection = new PDO('mysql:host=db;dbname=blog_app_db', 'root', 'secret');
 $result = $connection->query("SELECT id, title FROM posts");
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>List of Posts</title>
+    <title>List of Posts (original)</title>
 </head>
 <body>
-<h1>List of Posts</h1>
+<h1>List of Posts (original)</h1>
 <ul>
     <?php while($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
     <li>
