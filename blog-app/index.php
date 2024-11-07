@@ -1,14 +1,20 @@
 <?php
 
-require_once 'model.php';
-require_once 'controller.php';
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if ($uri === '/' || $uri === '/index.php') {
-    list_action();
-} else if ($uri === '/index.php/show' && isset($_GET['id'])) {
-    show_action($_GET['id']);
+require_once 'vendor/autoload.php';
+
+$request = Request::createFromGlobals();
+
+$uri = $request->getPathInfo();
+if ($uri === '/') {
+    $response = list_action();
+} else if ($uri === '/show' && $request->query->has('id')) {
+    $response = show_action($request->query->get('id'));
 } else {
-    header('HTTP/1.1 404 Not Found');
-    echo '<html lang="en"><body><h1>Page Not Found</h1></body></html>';
+    $html = '<html lang="en"><body><h1>Page Not Found</h1></body></html>';
+    $response = new Response($html, Response::HTTP_NOT_FOUND);
 }
+
+$response->send();

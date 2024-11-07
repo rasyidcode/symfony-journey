@@ -1,0 +1,17 @@
+{
+    "name": "symfony-journey/blog-app",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rcd",
+            "email": "rasyidcode7@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/http-foundation": "^7.1"
+    },
+    "autoload": {
+        "files": ["model.php", "controller.php"]
+    }
+}
