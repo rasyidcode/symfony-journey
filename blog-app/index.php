@@ -3,24 +3,12 @@
 $connection = new PDO('mysql:host=db;dbname=blog_app_db', 'root', 'secret');
 $result = $connection->query("SELECT id, title FROM posts");
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>List of Posts (original)</title>
-</head>
-<body>
-<h1>List of Posts (original)</h1>
-<ul>
-    <?php while($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
-    <li>
-        <a href="/show.php?id=<?php echo $row['id']; ?>">
-            <?php echo $row['title']; ?>
-        </a>
-    </li>
-    <?php endwhile; ?>
-</ul>
-</body>
-</html>
+$posts = [];
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $posts[] = $row;
+}
 
-<?php $connection = null; ?>
+$connection = null;
+
+// include the HTML presentation code
+require 'templates/list.php';
