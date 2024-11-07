@@ -7,6 +7,7 @@ services:
     volumes:
       - ./first-page:/srv/first-page
       - ./blog-app:/srv/blog-app
+      - ./syblog-app:/srv/syblog-app
     depends_on:
       - db
     networks:
@@ -18,8 +19,10 @@ services:
     volumes:
       - ./first-page:/srv/first-page
       - ./blog-app:/srv/blog-app
+      - ./syblog-app:/srv/syblog-app
       - ./first-page.test.conf:/etc/nginx/conf.d/first-page.test.conf
       - ./blog-app.test.conf:/etc/nginx/conf.d/blog-app.test.conf
+      - ./syblog-app.test.conf:/etc/nginx/conf.d/syblog-app.test.conf
     working_dir: /srv
     ports:
       - "80:80"

@@ -1,0 +1,13 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+blog_list:
+    path:   /blog
+    controller: App\Controller\BlogController::list
+
+blog_show:
+    path:   /blog/show/{id}
+    controller: App\Controller\BlogController::show
