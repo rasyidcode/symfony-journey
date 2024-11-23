@@ -35,7 +35,7 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' 
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN setup-user -a appuser && \
-    echo 'permit persist :wheel' > /etc/doas.d/doas.conf
+    echo 'permit nopass :wheel' > /etc/doas.d/doas.conf
 
 USER appuser
 

@@ -8,6 +8,7 @@ services:
       - ./first-page:/srv/first-page
       - ./blog-app:/srv/blog-app
       - ./syblog-app:/srv/syblog-app
+      - ./test-relation:/srv/test-relation
     depends_on:
       - db
     networks:
@@ -20,9 +21,11 @@ services:
       - ./first-page:/srv/first-page
       - ./blog-app:/srv/blog-app
       - ./syblog-app:/srv/syblog-app
+      - ./test-relation:/srv/test-relation
       - ./first-page.test.conf:/etc/nginx/conf.d/first-page.test.conf
       - ./blog-app.test.conf:/etc/nginx/conf.d/blog-app.test.conf
       - ./syblog-app.test.conf:/etc/nginx/conf.d/syblog-app.test.conf
+      - ./test-relation.test.conf:/etc/nginx/conf.d/test-relation.test.conf
     working_dir: /srv
     ports:
       - "80:80"
