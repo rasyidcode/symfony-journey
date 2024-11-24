@@ -9,6 +9,8 @@ services:
       - ./blog-app:/srv/blog-app
       - ./syblog-app:/srv/syblog-app
       - ./test-relation:/srv/test-relation
+      - ./simple-security:/srv/simple-security
+      - ./about-controller:/srv/about-controller
     depends_on:
       - db
     networks:
@@ -22,10 +24,14 @@ services:
       - ./blog-app:/srv/blog-app
       - ./syblog-app:/srv/syblog-app
       - ./test-relation:/srv/test-relation
+      - ./simple-security:/srv/simple-security
+      - ./about-controller:/srv/about-controller
       - ./first-page.test.conf:/etc/nginx/conf.d/first-page.test.conf
       - ./blog-app.test.conf:/etc/nginx/conf.d/blog-app.test.conf
       - ./syblog-app.test.conf:/etc/nginx/conf.d/syblog-app.test.conf
       - ./test-relation.test.conf:/etc/nginx/conf.d/test-relation.test.conf
+      - ./simple-security.test.conf:/etc/nginx/conf.d/simple-security.test.conf
+      - ./about-controller.test.conf:/etc/nginx/conf.d/about-controller.test.conf
     working_dir: /srv
     ports:
       - "80:80"
@@ -33,6 +39,7 @@ services:
       sj-network:
         aliases:
           - first-page.test
+          - simple-security.test
     depends_on:
       - php82
   db:
