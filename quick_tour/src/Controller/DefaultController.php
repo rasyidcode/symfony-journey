@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\GreetingGenerator;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,8 +13,12 @@ class DefaultController extends AbstractController
 {
 
     #[Route('/hello/{name}', name: 'index', methods: ['GET'])]
-    public function index(string $name): Response
+    public function index(string $name, LoggerInterface $logger, GreetingGenerator $generator): Response
     {
+        $greeting = $generator->getRandomGreeting();
+
+        $logger->info("Saying $greeting to $name!");
+
         return $this->render('default/index.html.twig', [
             'name' => $name
         ]);
