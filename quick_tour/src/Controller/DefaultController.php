@@ -8,10 +8,16 @@ use Symfony\Component\Routing\Attribute\Route;
 class DefaultController
 {
 
-    #[Route('/', name: 'index')]
-    public function index(): Response
+    #[Route('/hello/{name}', name: 'index')]
+    public function index(string $name): Response
     {
-        return new Response('Hello!');
+        return new Response("Hello $name!");
+    }
+
+    #[Route('/simplicity', methods: ['GET'])]
+    public function simple(): Response
+    {
+        return new Response('Simple! Easy! Great!');
     }
 
 }
